@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>BMI Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      width: 300px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #4facfe;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #00c6ff;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .category {
+      margin-top: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>คำนวณ BMI</h2>
+
+  <input type="number" id="weight" placeholder="น้ำหนัก (กิโลกรัม)">
+  <input type="number" id="height" placeholder="ส่วนสูง (เซนติเมตร)">
+
+  <button onclick="calculateBMI()">คำนวณ</button>
+
+  <div class="result" id="bmiResult"></div>
+  <div class="category" id="bmiCategory"></div>
+</div>
+
+<script>
+  function calculateBMI() {
+    let weight = document.getElementById("weight").value;
+    let height = document.getElementById("height").value;
+
+    if (weight === "" || height === "") {
+      alert("กรุณากรอกข้อมูลให้ครบ");
+      return;
+    }
+
+    height = height / 100; // cm → m
+    let bmi = weight / (height * height);
+    bmi = bmi.toFixed(2);
+
+    let category = "";
+
+    if (bmi < 18.5) {
+      category = "น้ำหนักน้อย";
+    } else if (bmi < 24.9) {
+      category = "ปกติ";
+    } else if (bmi < 29.9) {
+      category = "น้ำหนักเกิน";
+    } else {
+      category = "อ้วน";
+    }
+
+    document.getElementById("bmiResult").innerText = "BMI = " + bmi;
+    document.getElementById("bmiCategory").innerText = "อยู่ในเกณฑ์: " + category;
+  }
+</script>
+
+</body>
+</html>
